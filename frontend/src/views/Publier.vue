@@ -75,7 +75,7 @@ export default {
 
     created () {
         this.getUser();
-        this.VerifierImage();
+        //this.VerifierImage();
     },
 
     methods: {
@@ -89,6 +89,8 @@ export default {
 
         VerifierImage() {
             this.ImageInput=document.querySelector('#ImageNouvellePublication');
+            //console.log(this.ImageInput);
+            if (this.ImageInput !== 'null') {
             if (typeof(this.ImageInput.files[0]) !== 'undefined') {
                 this.resultImage= 'File name ' + this.ImageInput.files[0].name + ', file type '+ this.ImageInput.files[0].type +', file size ' + this.ImageInput.files[0].size + '.';
                 if ( this.fileTypes.includes(this.ImageInput.files[0].type)) {
@@ -117,7 +119,7 @@ export default {
                 }
             } else {
                 this.resultImage= `aucune image n'apparaitra dans votre publication`;
-            }
+            }}
         },    
 
         onSubmit() {
