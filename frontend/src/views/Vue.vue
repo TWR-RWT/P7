@@ -29,8 +29,7 @@
                                 id="ModificationPublicationImage"
                                 name="ModificationPublicationImage"
                                 type="file"
-                                accept="image/*"
-                                @change="VerifierImage()"><br/>
+                                accept="image/*"><br/>
 
                         <label>Modifier le texte</label> <br/>
                         <textarea label="Modifier le texte" v-model="ModificationPublication" required></textarea><br/>
@@ -78,9 +77,9 @@
                         <div class="card">
                             <div class="card-title headline">Commenter</div>
                             <div class="card-text">
-                                <row>
+                                <br/>
                                     <textarea label="Ecrivez votre commentaire" v-model="NouveauCommentaire" required></textarea>
-                                </row>
+                                <br/>
                             </div>
                             <div class="card">
                                 <button @click="CommenterLaPublication(item.idpublication)">Confirmer</button>
@@ -212,8 +211,8 @@ export default {
                     console.log(err);
                 }
             }
-            sendPostRequest ();
-            this.getAllPublications ();
+            sendPostRequest();
+            this.getAllPublications();
         },
 
         SupprimerCommentaire(idpublication, idcommentaire, idusers) {
@@ -238,7 +237,7 @@ export default {
                     console.log(err);
                 }
             }
-            sendDeleteRequest ();
+            sendDeleteRequest();
             this.getAllPublications();
         },
 
@@ -265,7 +264,7 @@ export default {
                     console.log(err);
                 }
             }
-            sendPutRequest ();
+            sendPutRequest();
             this.getAllPublications();
         },
 
@@ -291,7 +290,7 @@ export default {
                     console.log(err);
                 }
             }
-            sendDeleteRequest ();
+            sendDeleteRequest();
             this.getAllPublications();
         },
 
@@ -328,6 +327,14 @@ export default {
                 const thingData = new FormData();
                 thingData.append('modif', JSON.stringify(modif));
                 thingData.append('image', modifFile);
+                try {
+                    axios.put(`http://localhost:3000/api/publications/${idpublication}`, thingData, {headers:{'authorization':`${this.token}`}})
+                    resolve(console.log("requête envoyée avec succès"));
+                }
+                catch (err){
+                    reject(console.log("erreur lors du requetage"));
+                }
+                /*
                 return new Promise(resolve => {
                     try {
                     axios.put(`http://localhost:3000/api/publications/${idpublication}`, thingData, {headers:{'authorization':`${this.token}`}}).subscribe(
@@ -342,7 +349,7 @@ export default {
                 catch (err){
                     console.log(err);
                 }
-                })
+                })*/
             });
 
         },
@@ -352,6 +359,14 @@ export default {
                 const thingData = new FormData();
                 thingData.append('modif', JSON.stringify(modif));
                 thingData.append('image', '');
+                try {
+                    axios.put(`http://localhost:3000/api/publications/${idpublication}`, thingData, {headers:{'authorization':`${this.token}`}});
+                    resolve(console.log("requête envoyée avec succès"))
+                }
+                catch (err){
+                    reject(console.log("requête envoyée avec succès"))
+                }
+                /*
                 return new Promise(resolve => {
                     try {
                     axios.put(`http://localhost:3000/api/publications/${idpublication}`, thingData, {headers:{'authorization':`${this.token}`}}).subscribe(
@@ -366,7 +381,7 @@ export default {
                 catch (err){
                     console.log(err);
                 }
-                })
+                })*/
             });
         },
     },

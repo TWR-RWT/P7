@@ -151,6 +151,15 @@ export default {
                 const thingData = new FormData();
                 thingData.append('thing', JSON.stringify(thingthing));
                 thingData.append('image', thingimage, thingthing.title);
+                try {
+                    axios.post('http://localhost:3000/api/publications', thingData, {headers:{'authorization':`${this.token}`}});
+                    resolve(console.log("requête bien envoyée"));
+                }
+                catch (err){
+                    reject(console.log("requêtage échoué"));
+                }
+                
+                /*
                 return new Promise(resolve => {
                     try {
                     axios.post('http://localhost:3000/api/publications', thingData, {headers:{'authorization':`${this.token}`}}).subscribe(
@@ -165,7 +174,7 @@ export default {
                 catch (err){
                     console.log(err);
                 }
-                })
+                })*/
             });
         },
 
@@ -173,7 +182,16 @@ export default {
             return new Promise((resolve, reject) => {
                 const thingData = new FormData();
                 thingData.append('thing', JSON.stringify(thingthing));
-                thingData.append('image', '');
+                thingData.append('image', '');    
+                try {
+                    axios.post('http://localhost:3000/api/publications', thingData, {headers:{'authorization':`${this.token}`}});
+                    resolve(console.log("requête bien envoyée"));
+                }
+                catch (err){
+                    reject(console.log("requêtage échoué"));
+                }
+                
+                /*
                 return new Promise(resolve => {
                     try {
                     axios.post('http://localhost:3000/api/publications', thingData, {headers:{'authorization':`${this.token}`}}).subscribe(
@@ -188,7 +206,7 @@ export default {
                 catch (err){
                     console.log(err);
                 }
-                })
+                })*/
             });
         },
     }
